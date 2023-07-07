@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package movie;
+
+message Empty {}
+
+service MovieService {
+  rpc getMovieList (MovieListRequest) returns (MovieListResponse);
+}
+
+message MovieListRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  optional string searchTerm = 3;
+}
+
+message MovieListResponse {
+  PaginationResponse pagination = 1;
+  repeated MovieInfo items = 2;
+}
+
+message PaginationResponse {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 totalPage = 3;
+  int32 total = 4;
+}
+
+message MovieInfo {
+  string name = 1;
+  string coverUrl = 2;
+}
